@@ -1,0 +1,7 @@
+*.un~
+*.swp
+tags
+target
+.history
+*.old
+.DS_Store
