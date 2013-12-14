@@ -1,0 +1,7 @@
+ld
+*~
+Gemfile*
+Guardfile
+bin
+.bundle
+
