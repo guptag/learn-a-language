@@ -1,4 +1,4 @@
-` clojure
+``` clojure
 
 ;; clojure installation (on mac)
 brew install leiningen
@@ -12,4 +12,4 @@ lein repl
 ;; loading a file in REPL
 (load-file "basic_repl.clj")
 
-`
+```
