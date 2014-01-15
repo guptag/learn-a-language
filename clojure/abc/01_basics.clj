@@ -30,8 +30,6 @@
 (println a-map-withspaces)
 
 
-
-
 #_(----------------------
    Function Defnitions
    ---------------------)
@@ -100,6 +98,47 @@
 (another-let-example)
 
 
+;; note the usage of underscore identifier
+;; for unused params
+(defn average-salary [users]
+  (let [user-data (vals users)
+        all-salaries (map :salary user-data)
+        total (apply + all-salaries)
+        _ (println "total salary: " total)]
+    (/ total (count user-data))))
+
+(average-salary {:User1 {:salary 10000}
+                 :User2 {:salary 15000}})
+
+
+#_(--------
+     do
+   ---------)
+
+(defn show-do-usage []
+  ;; group multiple s-expressions into one
+  (do
+    (println "1st s-expression")
+    (println "2nd s-expression")
+    (println "3rd s-expression")))
+(show-do-usage)
+
+
+#_(-----------------------
+     try...catch...finally
+   -----------------------)
+
+(defn average-salary [users]
+  (try
+    (let [user-data (vals users)
+          all-salaries (map :salary user-data)
+          total (apply + all-salaries)
+          _ (println "total salary: " total)]
+      (/ total (count user-data)))
+    (catch Exception e
+      (println "Error: no users!"))))
+
+(average-salary {})
 
 
 
