@@ -78,3 +78,19 @@
 
 (test-or 10)
 (test-or 2)
+
+
+
+#_(--------------------------------
+   loop, recur
+   --------------------------------)
+;; loop sets up the bindings
+;; recur rebinds the loop parameters
+;; recur won't consume the callstack (unlike calling self)
+(defn factorial [n]
+  (loop [current n fact 1]
+    (if (= current 1)
+      fact
+      (recur (dec current) (* fact current)))))
+
+(factorial 5)
