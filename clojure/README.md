@@ -15,6 +15,15 @@ lein repl
 ;; loading a file in REPL
 (load-file "basic_repl.clj")
 
+;; create new project
+lein new app <project-name-here>
+
+;; run the project
+lein run
+
+;; create a JAR file
+lein uberjar
+
 ```
 
 #### Good References
