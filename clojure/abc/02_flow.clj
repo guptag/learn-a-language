@@ -1,4 +1,6 @@
-;;; Credits: http://www.amazon.com/Clojure-Action-Amit-Rathore/dp/193518259
+;;; Credits:
+;;; http://www.amazon.com/Clojure-Action-Amit-Rathore/dp/193518259
+;;; http://clojuredocs.org/quickref/Clojure%20Core
 
 #_(-----------------
    if and if-not
@@ -94,3 +96,26 @@
       (recur (dec current) (* fact current)))))
 
 (factorial 5)
+
+
+#_(--------------------------------
+   doseq, dotimes
+   --------------------------------)
+
+(def users [{:name "AB" :salary 60000 :title "Sr. Developer"}
+            {:name "BB" :salary 55000 :title "Coordinator"}
+            {:name "CC" :salary 50000 :title "Tech Writer"}])
+
+;; doseq
+(defn print-names [all-users]
+  (doseq [user all-users]
+    (println (get user :name))))
+
+(print-names users)
+
+;; dotimes
+(defn print-salaries [all-users]
+  (dotimes [index (count all-users)]
+    (println (get users index))))
+
+(print-salaries users)
