@@ -1,7 +1,12 @@
 (ns linq.core
-  (:gen-class))
+  (:require [linq.data :refer :all]
+            [linq.restrictions :as restrictions]))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+(defn run-examples [examples]
+  (doseq [f examples] (f)))
+
+(defn -main [& args]
+  (run-examples restrictions/examples))
+
+
+;;(-main)
