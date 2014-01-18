@@ -38,6 +38,8 @@
    (get all-customers "customers"))
 )
 
+
+
 ;; Order mapping using anonymous method (from original version)
 ;; (map #(Order. (% "id") (ltime/to-local-date-time (% "orderdate")) (BigDecimal. (% "total"))) (get (x "orders") "order"))
 

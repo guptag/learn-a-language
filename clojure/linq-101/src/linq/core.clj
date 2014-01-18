@@ -9,4 +9,4 @@
   (run-examples restrictions/examples))
 
 
-;;(-main)
+(-main)
