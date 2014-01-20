@@ -17,3 +17,15 @@
 
 ;; ["learning"] ["clojure"]
 (map-indexed (fn [idx itm] [itm]) ["learning" "clojure"])
+
+
+
+#_(------------------
+    map
+---------------------)
+
+;; Use array as a map function
+(map ["Two" "Three" "one"] [0 2 1])
+
+;; Use hash-map as a map function
+(map {2 "Two" 3 "Three" 0 "Zero"} [0 2 3])
