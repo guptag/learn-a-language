@@ -35,6 +35,8 @@
 
 
 
+
+
 #_(-------------------------------------
 
 ;; //select to return a sequence of just the names of a list of products
@@ -75,6 +77,7 @@
 
 ;; (linq7a)
 ;; (linq7b)
+
 
 
 
@@ -128,6 +131,7 @@
 ------------------------------------)
 
 ;; Return sequence of the uppercase and lowercase versions of each word in the original array.
+
 ;; with map
 (defn linq9a []
   (let [words ["aPPLE" "BlUeBeRry" "cHeRyy"]
@@ -149,7 +153,10 @@
 
 
 
+
+
 #_(---------------------------------
+;;  // select to produce a sequence containing text representations of digits and whether their length is even or odd.
 ;;  public void Linq10()
 ;;  {
 ;;      int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
@@ -166,6 +173,7 @@
 ;;  }
 -----------------------------------)
 
+;; select to produce a sequence containing text representations of digits and whether their length is even or odd.
 (defn linq10 []
   (let [numbers [5 4 1 3 9 8 6 7 2 0]
        strings ["Zero" "One" "Two" "Three" "Four" "Five" "Six" "Seven" "Eight" "Nine"]
@@ -178,4 +186,79 @@
 
 
 
-(def examples [linq6 linq7a linq7b linq8 linq9a linq9b linq10])
+
+
+#_(-----------------------------------
+
+;; //select to produce a sequence containing some properties of Products,
+;; //including UnitPrice which is renamed to Price in the resulting type
+;; public void Linq11()
+;;{
+;;    List<Product> products = GetProductList();
+;;
+;;    var productInfos =
+;;        from p in products
+;;        select new { p.ProductName, p.Category, Price = p.UnitPrice };
+;;
+;;    Console.WriteLine("Product Info:");
+;;    foreach (var productInfo in productInfos)
+;;    {
+;;        Console.WriteLine("{0} is in the category {1} and costs {2} per unit.", productInfo.ProductName, productInfo.Category, productInfo.Price);
+;;    }
+;; }
+
+--------------------------------------)
+
+
+;; select to produce a sequence containing some properties of Products,
+;; including UnitPrice which is renamed to Price in the resulting type
+(defn linq11 []
+  (let [products products-list
+        product-infos
+          (for [p products]
+            { :product-name (:product-name p)
+              :category (:category p)
+              :price (:unit-price p)
+            })]
+    (println "Product Info")
+     (doseq [p-info product-infos]
+       (println (:product-name p-info) "is in the category" (:category p-info)
+                "and costs" (:price p-info) "per unit"))))
+
+;;(linq11)
+
+
+
+
+
+
+
+#_(------------------------------------
+;; // Indexed Select clause to determine if the value of ints in an array
+;; // match their position in the array.
+;; public void Linq12()
+;; {
+;;    int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+;;
+;;    var numsInPlace = numbers.Select((num, index) => new { Num = num, InPlace = (num == index) });
+;;
+;;    Console.WriteLine("Number: In-place?");
+;;    foreach (var n in numsInPlace)
+;;    {
+;;        Console.WriteLine("{0}: {1}", n.Num, n.InPlace);
+;;    }
+;; }
+
+------------------------------------)
+
+(defn linq12 []
+  (let [numbers [5 4 1 3 9 8 6 7 2 0]
+        nums-in-place
+        (map-indexed (fn [i num] {:num num :in-place (= num i)}) numbers)]
+    (println "Number: In-Place?")
+    (doseq [n nums-in-place]
+      (println (:num n) ": " (:in-place n)))))
+
+;;(linq12)
+
+(def examples [linq6 linq7a linq7b linq8 linq9a linq9b linq10 linq11])
