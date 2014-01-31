@@ -3,7 +3,8 @@
 
 
 #_(-------------------------------
-  ;; // filter all numbers < 5
+  ;; filter all numbers < 5
+
   ;; public void Linq1()
   ;; {
   ;;      int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
@@ -21,7 +22,6 @@
   ;; }
 ---------------------------------)
 
-;; filter all numbers < 5
 (defn linq1 []
   (let [numbers [5 4 1 3 9 8 6 7 2 0]
         numbers-lessthan-five (filter #(< % 5) numbers)]
@@ -35,9 +35,14 @@
 
 
 
+
+
+
+
 #_(-------------------------------
 
-   ;; // find all products that are out of stock
+  ;; find all products that are out of stock
+
   ;; public void Linq2()
   ;; {
   ;;      List<Product> products = GetProductList();
@@ -56,8 +61,6 @@
 
    ---------------------------------)
 
-
-;; find all products that are out of stock
 (defn linq2 []
   (let [all-products products-list
        sold-out-products (for [p all-products
@@ -72,8 +75,11 @@
 
 
 
+
+
 #_(-------------------------------
-  ;; //find all products in stock and greate than $3
+  ;; find all products in stock and greate than $3
+
   ;; public void Linq3()
   ;; {
   ;;      List<Product> products = GetProductList();
@@ -108,9 +114,13 @@
 
 
 
+
+
+
 #_(-------------------------------
 
-  ;; // Customers living in WA and their orders
+  ;; Customers living in WA and their orders
+
   ;; public void Linq4()
   ;; {
   ;;      List<Customer> customers = GetCustomerList();
@@ -132,7 +142,6 @@
   ;;  }
  ---------------------------------)
 
-;; Customers living in WA and their orders
 (defn linq4 []
   (let [customers customers-list
         customers-in-wa (filter #(= (:region %) "WA") customers)]
@@ -141,7 +150,11 @@
         (println "Customer" (:customer-id c) ": " (:company-name c))
         (doseq [order (:orders c)]
           (println "   Order" (:order-id order) ":" (:order-date order) ":" (:total order))))))
+
 ;; (linq4)
+
+
+
 
 
 
@@ -150,7 +163,8 @@
 
 #_(-------------------------------
 
-  ;; // Indexed Where clause that returns digits whose name is shorter than their value.
+  ;; Indexed Where clause that returns digits whose name is shorter than their value.
+
   ;; public void Linq5()
   ;; {
   ;;      string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
@@ -165,7 +179,6 @@
   ;;  }
 ---------------------------------)
 
-;; Indexed Where clause that returns digits whose name is shorter than their value.
 (defn linq5 []
   (let [digits ["zero" "one" "two" "three" "four" "five" "six" "seven" "eight" "nine"]
         short-digits

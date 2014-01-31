@@ -8,7 +8,7 @@
 
 #_(-------------------------------
 
-  ;; // Select to produce a sequence of ints one higher than those in an existing array of ints
+  ;; Select to produce a sequence of ints one higher than those in an existing array of ints
 
   ;; public void Linq6()
   ;; {
@@ -41,7 +41,7 @@
 
 #_(-------------------------------------
 
-;; //select to return a sequence of just the names of a list of products
+;; Select to return a sequence of just the names of a list of products
 
 ;; public void Linq7()
 ;; {
@@ -119,7 +119,7 @@
 
 #_(----------------------------------
 
-;; // Return sequence of the uppercase and lowercase versions of each word in the original array.
+;; Return sequence of the uppercase and lowercase versions of each word in the original array.
 
 ;; public void Linq9()
 ;; {
@@ -161,7 +161,7 @@
 
 #_(---------------------------------
 
-;;  // select to produce a sequence containing text representations of digits and whether their length is even or odd.
+;;  Select to produce a sequence containing text representations of digits and whether their length is even or odd.
 
 ;;  public void Linq10()
 ;;  {
@@ -195,8 +195,8 @@
 
 #_(-----------------------------------
 
-;; //select to produce a sequence containing some properties of Products,
-;; //including UnitPrice which is renamed to Price in the resulting type
+;; Select to produce a sequence containing some properties of Products,
+;; including UnitPrice which is renamed to Price in the resulting type
 
 ;; public void Linq11()
 ;;{
@@ -236,9 +236,9 @@
 
 #_(------------------------------------
 
-;; // Indexed Select clause to determine if the value of ints in an array
+;; Indexed Select clause to determine if the value of ints in an array
+;; match their position in the array.
 
-;; // match their position in the array.
 ;; public void Linq12()
 ;; {
 ;;    int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
@@ -271,7 +271,7 @@
 
 #_(-------------------------------------
 
-;;  //make a simple query that returns the text form of each digit less than 5.
+;;  Make a simple query that returns the text form of each digit less than 5.
 
 ;;  public void Linq13()
 ;;  {
@@ -311,8 +311,8 @@
 
 #_(---------------------------------------------
 
-;; // query that returns all pairs of numbers from both arrays such
-;; // that the number from numbersA is less than the number from numbersB.
+;; Query that returns all pairs of numbers from both arrays such
+;; that the number from numbersA is less than the number from numbersB.
 
 ;; public void Linq14()
 ;; {
@@ -347,4 +347,202 @@
 
 ;;(linq14)
 
-(def examples [linq6 linq7a linq7b linq8 linq9a linq9b linq10 linq11 linq12 linq13 linq14])
+
+
+
+
+
+
+#_(---------------------------------------------
+
+;; Select all orders where the order total is less than 500.00.
+
+;; public void Linq15()
+;; {
+;;    List<Customer> customers = GetCustomerList();
+;;
+;;    var orders =
+;;        from c in customers
+;;        from o in c.Orders
+;;        where o.Total < 500.00M
+;;        select new { c.CustomerID, o.OrderID, o.Total };
+;;
+;;    ObjectDumper.Write(orders);
+;;}
+
+------------------------------------------------)
+
+(defn linq15 []
+  (let [customers customers-list
+        orders
+        (for [c customers
+              o (:orders c)
+              :when (> (:total o) 500)]
+          {:customer-id (:customer-id c),
+           :order-id (:order-id o)
+           :total (:total o)})]
+    (doseq [o orders]
+      (println o))))
+
+;;(linq15)
+
+
+
+
+
+
+
+#_(---------------------------------------------
+
+;; Compound from clause to select all orders where the order was made in 1998 or later.
+
+;; public void Linq16()
+;; {
+;;    List<Customer> customers = GetCustomerList();
+;;
+;;    var orders =
+;;        from c in customers
+;;        from o in c.Orders
+;;        where o.OrderDate >= new DateTime(1998, 1, 1)
+;;        select new { c.CustomerID, o.OrderID, o.OrderDate };
+;;
+;;    ObjectDumper.Write(orders);
+;;}
+---------------------------------------------)
+
+(defn linq16 []
+  (let [customers customers-list
+        orders
+        (for [c customers
+              o (:orders c)
+              :when (time/after? (:order-date o) (time/date-time 1998 1 1))]
+          {:customer-id (:customer-id c)
+           :order-id (:order-id o)
+           :order-date (:order-date o)})]
+       (doseq [o orders] (println o))))
+
+;;(linq16)
+
+
+
+
+#_(---------------------------------------------
+
+;; public void Linq17()
+;; {
+;;    List<Customer> customers = GetCustomerList();
+;;
+;;    var orders =
+;;        from c in customers
+;;        from o in c.Orders
+;;        where o.Total >= 2000.0M
+;;        select new { c.CustomerID, o.OrderID, o.Total };
+;;
+;;    ObjectDumper.Write(orders);
+;; }
+
+---------------------------------------------)
+
+(defn linq17 []
+  (let [customers customers-list
+        orders
+        (for [c customers
+              o (:orders c)
+              :when (>= (:total o) 2000)]
+          {:customer-id (:customer-id c)
+           :order-id (:order-id o)
+           :total (:total o)})]
+    (doseq [o orders] (println o))))
+
+;;(linq17)
+
+
+
+
+
+#_(---------------------------------------------
+
+;; Multiple from clauses so that filtering on customers can be done before selecting their orders.
+;; This makes the query more efficient by not selecting and then discarding orders
+;; for customers outside of Washington.
+
+;; public void Linq18()
+;; {
+;;    List<Customer> customers = GetCustomerList();
+;;
+;;    DateTime cutoffDate = new DateTime(1997, 1, 1);
+;;
+;;    var orders =
+;;        from c in customers
+;;        where c.Region == "WA"
+;;        from o in c.Orders
+;;        where o.OrderDate >= cutoffDate
+;;        select new { c.CustomerID, o.OrderID };
+;;
+;;    ObjectDumper.Write(orders);
+;; }
+---------------------------------------------)
+
+(defn linq18 []
+  (let [cutoff-date (time/date-time 1997 1 1)
+        customers customers-list
+        orders
+         (for [c customers
+               :when (= (:region c) "WA")
+               o (:orders c)
+               :when (time/after? (:order-date o) cutoff-date)]
+           {:customer-id (:customer-id c)
+            :order-id  (:order-id o)})]
+      (doseq [o orders] (println o))))
+
+;;(linq18)
+
+
+
+
+
+#_(---------------------------------------------
+
+;; Select all orders, while referring to customers by the order in which they are returned from the query.
+
+;; public void Linq19()
+;; {
+;;    List<Customer> customers = GetCustomerList();
+;;
+;;    var customerOrders =
+;;        customers.SelectMany(
+;;            (cust, custIndex) =>
+;;            cust.Orders.Select(o => "Customer #" + (custIndex + 1) +
+;;                                    " has an order with OrderID " + o.OrderID));
+;;
+;;    ObjectDumper.Write(customerOrders);
+;; }
+---------------------------------------------)
+
+(defn linq19a []
+  (let [customers customers-list
+        customer-orders
+        (map-indexed
+         (fn [i c]
+           (map #(str "Customer #" (inc i) " has an order with OrderID " (:order-id %1))
+                (:orders c)))
+          customers)]
+    (doseq [c-order (flatten customer-orders)] (println c-order))))
+
+;;(linq19a)
+
+
+(defn linq19b []
+  (let [customers customers-list
+        customer-orders
+        (for [[i c] (map-indexed vector customers)
+              o (:orders c)]
+          (str "Customer #" (inc i) " has an order with OrderID" (:order-id o)))]
+    (doseq [x customer-orders] (println x))))
+
+;;(linq19b)
+
+
+
+(def examples [linq6 linq7a linq7b linq8 linq9a linq9b linq10 linq11 linq12 linq13
+               linq14 linq15 linq16 linq17 linq18 linq19a linq19b])

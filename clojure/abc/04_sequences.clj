@@ -29,3 +29,18 @@
 
 ;; Use hash-map as a map function
 (map {2 "Two" 3 "Three" 0 "Zero"} [0 2 3])
+
+
+
+
+#_(------------------
+    take
+---------------------)
+
+;; (1 2 3)
+(take 3 [1 2 3 4 5 6])
+
+;; (6 7 8)
+(take 3 (drop 5 (range 1 11)))
+
+
