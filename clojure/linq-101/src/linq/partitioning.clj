@@ -175,6 +175,94 @@
 
 
 
+#_(-------------------------------------
+
+;; Return elements starting from the beginning of the array until a number
+;; is hit that is less than its position in the array
+
+;; public void Linq25()
+;; {
+;;    int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+;;    var firstSmallNumbers = numbers.TakeWhile((n, index) => n >= index);
+;;    Console.WriteLine("First numbers not less than their position:");
+;;    foreach (var n in firstSmallNumbers)
+;;    {
+;;        Console.WriteLine(n);
+;;    }
+;; }
+---------------------------------------)
+
+(defn linq25 []
+  (let [numbers [5 4 1 3 9 8 6 7 2 0]
+        first-small-numbers
+        (map (fn [[i n]] n)
+             (take-while (fn [[i num]] (>= num i)) (map-indexed vector numbers)))]
+    (println "First numbers not less than their position:")
+    (doseq [n first-small-numbers]
+      (println n))))
+
+(linq25)
+
+
+
+
+
+
+
+#_(-------------------------------------
+
+;; Get the elements of the array starting from the first element divisible by 3
+
+;; public void Linq26()
+;; {
+;;    int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+;;    var allButFirst3Numbers = numbers.SkipWhile(n => n % 3 != 0);
+;;    Console.WriteLine("All elements starting from first element divisible by 3:");
+;;    foreach (var n in allButFirst3Numbers)
+;;    {
+;;      Console.WriteLine(n);
+;;    }
+;; }
+---------------------------------------)
+
+(defn linq26 []
+  (let [numbers [5 4 1 3 9 8 6 7 2 0]
+        all-but-first-three (drop-while #(not= 0 (mod %1 3)) numbers)]
+    (println "All elements starting from first element divisible by 3:")
+    (doseq [n all-but-first-three] (println n))))
+
+(linq26)
+
+
+
+
+
+#_(-------------------------------------
+
+;; Get the elements of the array starting from the first element less than its position
+
+;; public void Linq27()
+;; {
+;;   int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+;;   var laterNumbers = numbers.SkipWhile((n, index) => n >= index);
+;;   Console.WriteLine("All elements starting from first element less than its position:");
+;;   foreach (var n in laterNumbers)
+;;   {
+;;       Console.WriteLine(n);
+;;   }
+;; }
+---------------------------------------)
+
+
+(defn linq27 []
+  (let [numbers [5 4 1 3 9 8 6 7 2 0]
+        later-numbers
+        (map (fn [[i n]] n)
+             (drop-while (fn [[i num]] (>= num i))(map-indexed vector numbers))
+    (println "All elements starting from first element less than its position:")
+    (doseq [n later-numbers] (println n)))
+
+(linq27)
 
 
 
@@ -195,16 +283,4 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-(def examples [linq20 linq21 linq22 linq23])
+(def examples [linq20 linq21 linq22 linq23 linq24 linq25 linq26])

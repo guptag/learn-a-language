@@ -157,8 +157,6 @@
 
 
 
-
-
 #_(---------------------------------
 
 ;;  Select to produce a sequence containing text representations of digits and whether their length is even or odd.
@@ -187,8 +185,6 @@
       (println "The digit" (:digit d) "is" (if (:even d) "even" "odd")))))
 
 ;;(linq10)
-
-
 
 
 
@@ -229,7 +225,6 @@
                 "and costs" (:price p-info) "per unit"))))
 
 ;;(linq11)
-
 
 
 
@@ -351,8 +346,6 @@
 
 
 
-
-
 #_(---------------------------------------------
 
 ;; Select all orders where the order total is less than 500.00.
@@ -385,8 +378,6 @@
       (println o))))
 
 ;;(linq15)
-
-
 
 
 
@@ -496,7 +487,6 @@
       (doseq [o orders] (println o))))
 
 ;;(linq18)
-
 
 
 
