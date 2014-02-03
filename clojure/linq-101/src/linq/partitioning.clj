@@ -137,7 +137,7 @@
              :order-date (:order-date o)}))]
     (doseq [order all-but-first-two-orders] (println order))))
 
-(linq24)
+;;(linq24)
 
 
 
@@ -169,7 +169,7 @@
     (doseq [n first-numbers-lessthan-six]
       (println n))))
 
-(linq24)
+;;(linq24)
 
 
 
@@ -201,7 +201,7 @@
     (doseq [n first-small-numbers]
       (println n))))
 
-(linq25)
+;;(linq25)
 
 
 
@@ -231,7 +231,7 @@
     (println "All elements starting from first element divisible by 3:")
     (doseq [n all-but-first-three] (println n))))
 
-(linq26)
+;;(linq26)
 
 
 
@@ -258,27 +258,11 @@
   (let [numbers [5 4 1 3 9 8 6 7 2 0]
         later-numbers
         (map (fn [[i n]] n)
-             (drop-while (fn [[i num]] (>= num i))(map-indexed vector numbers))
+             (drop-while (fn [[i num]] (>= num i))(map-indexed vector numbers)))]
     (println "All elements starting from first element less than its position:")
-    (doseq [n later-numbers] (println n)))
+    (doseq [n later-numbers] (println n))))
 
-(linq27)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+;;(linq27)
 
 
 
