@@ -137,7 +137,7 @@
              :order-date (:order-date o)}))]
     (doseq [order all-but-first-two-orders] (println order))))
 
-(linq24)
+;;(linq23)
 
 
 
@@ -169,7 +169,7 @@
     (doseq [n first-numbers-lessthan-six]
       (println n))))
 
-(linq24)
+;;(linq24)
 
 
 
@@ -201,7 +201,7 @@
     (doseq [n first-small-numbers]
       (println n))))
 
-(linq25)
+;;(linq25)
 
 
 
@@ -231,7 +231,7 @@
     (println "All elements starting from first element divisible by 3:")
     (doseq [n all-but-first-three] (println n))))
 
-(linq26)
+;;(linq26)
 
 
 
@@ -263,22 +263,6 @@
     (doseq [n later-numbers] (println n)))
 
 (linq27)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
