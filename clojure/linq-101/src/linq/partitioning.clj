@@ -167,7 +167,7 @@
     (doseq [n first-numbers-lessthan-six]
       (println n))))
 
-(linq24)
+;;(linq24)
 
 
 
@@ -260,8 +260,8 @@
     (println "All elements starting from first element less than its position:")
     (doseq [n later-numbers] (println n))))
 
-;;(linq27)
+;; (linq27)
 
 
 
-(def examples [linq20 linq21 linq22 linq23 linq24 linq25 linq26])
+(def examples [linq20 linq21 linq22 linq23 linq24 linq25 linq26 linq27])

@@ -1,8 +1,8 @@
 (ns linq.core
   (:require [linq.data :refer :all]
             [linq.restrictions :as restrictions]
-            [linq.projections :as projections
-            [linq.partitioning :as partitioning]]))
+            [linq.projections :as projections]
+            [linq.partitioning :as partitioning]))
 
 (defn run-examples [examples]
   (doseq [f examples] (f)))
