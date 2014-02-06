@@ -137,13 +137,7 @@
              :order-date (:order-date o)}))]
     (doseq [order all-but-first-two-orders] (println order))))
 
-<<<<<<< HEAD
 ;;(linq23)
-=======
-;;(linq24)
->>>>>>> 3a502fb85e9d70dfdcb090bc308d9170498b45ad
-
-
 
 
 
@@ -173,7 +167,7 @@
     (doseq [n first-numbers-lessthan-six]
       (println n))))
 
-;;(linq24)
+(linq24)
 
 
 
