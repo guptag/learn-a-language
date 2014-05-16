@@ -4,4 +4,4 @@ Gemfile*
 Guardfile
 bin
 .bundle
-
+.DS_Store
