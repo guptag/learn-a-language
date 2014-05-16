@@ -137,9 +137,7 @@
              :order-date (:order-date o)}))]
     (doseq [order all-but-first-two-orders] (println order))))
 
-;;(linq24)
-
-
+;;(linq23)
 
 
 
@@ -263,8 +261,6 @@
     (doseq [n later-numbers] (println n))))
 
 ;; (linq27)
-
-
 
 
 (def examples [linq20 linq21 linq22 linq23 linq24 linq25 linq26 linq27])
