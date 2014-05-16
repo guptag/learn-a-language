@@ -3,7 +3,7 @@
 
 > compile
 
-> project abc
+> project foundations
 > run (choose which main to run)
 > test
 
@@ -11,7 +11,7 @@
 > run
 > test
 
-> sbt "project abc" "run hello world"
+> sbt "project foundations" "run hello world"
 > (choose which main to run)
 
 ```

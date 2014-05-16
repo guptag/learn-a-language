@@ -16,10 +16,10 @@ object LearnALanguage extends Build {
   lazy val root =
     Project(id = "root",
             base = file("."),
-            settings = opts) aggregate (abc, algorithms/*, dataprocessing, datastructures, networking, sysutils, webutils*/)
-  lazy val abc =
-    Project(id = "abc",
-            base = file("abc"),
+            settings = opts) aggregate (foundations, algorithms/*, dataprocessing, datastructures, networking, sysutils, webutils*/)
+  lazy val foundations =
+    Project(id = "foundations",
+            base = file("foundations"),
             settings = opts)
   lazy val algorithms =
     Project(id = "algorithms",
