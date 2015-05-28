@@ -6,26 +6,30 @@
 sudo apt-get install curl git-core
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 (update ~/.profile as listed below)
-pyenv update # update pyenv
-pyenv install --list # list of available python versions to install
+pyenv update                # update pyenv
+pyenv install --list        # list of available python versions to install
 which python
 python --version
+```
 
-sudo apt-get build-dep python3.4 # install dependencies of new python version
+```
+sudo apt-get build-dep python3.4  # install dependencies of new python version
 
 sudo apt-get install build-essential wget \
 libreadline-dev libncurses5-dev libssl1.0.0 tk8.5-dev \
-zlib1g-dev liblzma-dev  # install additional dependencies
+zlib1g-dev liblzma-dev            # install additional dependencies
 
 pyenv install 3.4.3 -v > python-install-3.4.3.log # build and install python
+```
 
-pyenv versions # list of installed python versions
+```
+pyenv versions                # list of installed python versions
 
-export PYENV_VERSION=3.3.4 # Change python version for a shell session
+export PYENV_VERSION=3.3.4    # Change python version for a shell session
 OR
-~/test$ pyenv local 3.3.4  # change python version for a local directory
+~/test$ pyenv local 3.3.4     # change python version for a local directory
 OR
-PYENV_VERSION=3.3.4 python # For a single use
+PYENV_VERSION=3.3.4 python    # For a single use
 
 pyenv rehash # Rehash all binaries when new libraries are installed via pip
 
@@ -43,22 +47,24 @@ $ pip install virtualenvwrapper
 $ export WORKON_HOME=~/PythonEnvs
 $ mkdir -p $WORKON_HOME
 $ source /usr/local/bin/virtualenvwrapper.sh
-$ mkvirtualenv env1 # Create an environment
-(env1)$ pip install django # Install packages
-(env1)$ ls sitepackages # list packages
-(env1)$ ls $WORKON_HOME # show env path
+$ mkvirtualenv env1           # Create an environment
+(env1)$ pip install django    # Install packages
+(env1)$ ls sitepackages       # list packages
+(env1)$ ls $WORKON_HOME       # show env path
+```
 
+```
 $ mkvirtualenv -p python2.6 env2 # Create another environment with specific python version
 
-$ workon env1  # Switch between environments
+$ workon env1                    # Switch between environments
 
-$ echo $VIRTUAL_ENV # Show current environment
+$ echo $VIRTUAL_ENV              # Show current environment
 
-$ deactivate # Back to system's default environment
+$ deactivate                     # Back to system's default environment
 
-$ rmvirtualenv env2 # Delete an environment
+$ rmvirtualenv env2              # Delete an environment
 
-$ lsvirtualenv # lists all environments
+$ lsvirtualenv                   # lists all environments
 ```
 
 
