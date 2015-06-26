@@ -172,3 +172,22 @@ for i in range(SIZE):
     new_item = random.randrange(SIZE*2)
     bisect.insort(my_list, new_item)
     print('%2d ->' % new_item, my_list)
+
+# When List is not an answer
+  # To store 10million floating point numbers, use Array
+  # Constantly adding and removing items from the ends of list, use deque (double-ended queue)
+  # If code does a lot of containment checks - item in my_collection use set (optimized for fast membership checking)
+
+
+# Deque
+from collections import deque
+dq = deque(range(10), maxlen=10)
+print(dq)
+dq.rotate(3)
+print(dq)
+dq.rotate(-4)
+print(dq)
+dq.appendleft(-1)
+dq.extend([11,22,33])
+dq.extendleft([10,20,30,40])
+print(dq)
