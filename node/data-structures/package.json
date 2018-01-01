@@ -4,11 +4,11 @@
   "description": "Minimalistic boilerplate to quick-start Node.js development in TypeScript.",
   "engineStrict": true,
   "engines": {
-    "node": ">= 8.9.0"
+    "node": ">= 6.2.1"
   },
   "devDependencies": {
     "@types/jest": "~21.1.9",
-    "@types/node": "~8.5.2",
+    "@types/node": "~6.0.95",
     "jest": "~22.0.3",
     "rimraf": "~2.6.2",
     "tslint": "~5.8.0",
