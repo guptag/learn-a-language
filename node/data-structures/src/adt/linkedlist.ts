@@ -12,46 +12,57 @@ export interface ILinkedList<T> {
   print(): IterableIterator<string>;
 }
 
+/**
+ * Linked List Implementation
+ */
 export class LinkedList<T> implements ILinkedList<T> {
   head: INode<T>;
 
-  constructor(head?: INode<T>) {
-      if (head) {
-        this.head = head; 
+  constructor(data?: T) {
+      if (data) {
+        this.head = {
+          data: data,
+          next: null
+        };
       }
   }
 
   find (data: T): INode<T> | null {
-    let iterator: INode<T> = this.head
+    let iterator: INode<T> = this.head;
 
     while (iterator) {
-      if (this.head.data === data)  {
-        return this.head;
+      if (iterator.data === data)  {
+        return iterator;
       }
-      iterator = this.head.next;
+      iterator = iterator.next;
     }
 
     return null;
   }
 
   insert(data: T): void {
-     let newNode: INode<T> = {
-       data: data,
-       next: this.head
-     };
-     this.head = newNode;
+    const newNode: INode<T> = {
+      data: data,
+      next: this.head
+    };
+    this.head = newNode;
   }
 
   delete(data: T): void {
-    let iterator: INode<T> = this.head
+    if (this.head && this.head.data === data) {
+      this.head = this.head.next;
+      return;
+    }
 
-    while (iterator && iterator.next) {
-      if (iterator.next.data === data)  {
-        iterator.next = iterator.next.next ? iterator.next.next : null;
-        break;
+    let current: INode<T> = this.head.next;
+    let previous: INode<T> = this.head;
+    while (current) {
+      if (current.data === data)  {
+        previous.next = current.next;
+        return;
       }
-
-      iterator = iterator.next;
+      previous = current;
+      current = current.next;
     }
   }
 
@@ -62,6 +73,5 @@ export class LinkedList<T> implements ILinkedList<T> {
       yield iterator.data.toString();
       iterator = iterator.next;
     }
-
   }
 }
