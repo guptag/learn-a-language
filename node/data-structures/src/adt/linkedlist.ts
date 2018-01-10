@@ -56,6 +56,7 @@ export class LinkedList<T> implements ILinkedList<T> {
 
     let current: INode<T> = this.head.next;
     let previous: INode<T> = this.head;
+
     while (current) {
       if (current.data === data)  {
         previous.next = current.next;

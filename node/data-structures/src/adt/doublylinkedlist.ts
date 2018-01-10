@@ -14,7 +14,7 @@ export interface IDoublyLinkedList<T> {
 }
 
     /**
-     * Linked List Implementation
+     * Doubly Linked List Implementation
      */
 export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
   head: INode<T>;
