@@ -1,7 +1,10 @@
 module.exports = {
   testEnvironment: 'node',
-  transform: {
+  /*transform: {
     '.(ts|tsx)': '<rootDir>/preprocessor.js'
+  },*/
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
   },
   moduleFileExtensions: [
     'ts',
@@ -15,4 +18,13 @@ module.exports = {
     'src/**/*.{ts,tsx,js,jsx}',
     '!src/**/*.d.ts',
   ],
+  mapCoverage: true,
+  "globals": {
+    "ts-jest": {
+      "skipBabel": true
+    }
+  }
 };
+
+
+
