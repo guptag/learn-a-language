@@ -26,7 +26,7 @@ export interface ITree<T extends { toString(): string}> {
   root: ITreeNode<T>;
   find(data: T): ITreeNode<T> | null;
   add(data: T): void;
-  remove(node: ITreeNode<T>): void;
+  remove(data: T): void;
   clear(): void;
   getSize(): number;
   height(): number;
@@ -62,7 +62,7 @@ export class BinarySearchTree<T> implements ITree<T> {
 
   find(data: T): ITreeNode<T> | null {
     const findFromNode: (dataToFind: T, current: ITreeNode<T>) => ITreeNode<T>  = (dataToFind: T, current: ITreeNode<T>) => {
-      if (!parent) {
+      if (!current) {
         return null;
       } else {
         const compareVal: number = this.compareFn(dataToFind, current.data);
@@ -83,8 +83,41 @@ export class BinarySearchTree<T> implements ITree<T> {
     this.addToNode(data, this.root);
   }
 
-  remove(node: ITreeNode<T>): void {
-    console.log(node);
+  remove(data: T): void {
+    const nodeToDelete = this.find(data);
+
+    if (!nodeToDelete) { return; }
+
+    if (nodeToDelete === this.root) {
+      this.clear();
+      return;
+    }
+
+    if (!nodeToDelete.left && !nodeToDelete.right) { //no child nodes
+      this.replaceNode(nodeToDelete, null);
+    } else if ((nodeToDelete.left && !nodeToDelete.right) || /* has one child node */
+             (!nodeToDelete.left && nodeToDelete.right)) {
+      const childNode = nodeToDelete.left || nodeToDelete.right;
+      this.replaceNode(nodeToDelete, childNode);
+    } else { /* has two child nodes */
+      // find the inorder successor for the node to delete
+      let successor = nodeToDelete.right;
+      while (successor != null) {
+        if (successor.left) {
+          successor = successor.left;
+        } else {
+          break;
+        }
+      }
+
+      const successorData: T = successor.data;
+
+      // remove the successor (will have either zero or one child node)
+      this.remove(successorData);
+
+      // replace the current node's data with successor node's data
+      nodeToDelete.data = successorData;
+    }
   }
 
   clear(): void {
@@ -150,6 +183,22 @@ export class BinarySearchTree<T> implements ITree<T> {
         parent.right = this.createNode(data, parent);
       }
     }
+  }
+
+  private replaceNode(nodeToReplace: ITreeNode<T>, replaceWith: ITreeNode<T>) {
+    if (!nodeToReplace || !nodeToReplace.parent) { return; }
+
+    const nodeOnLeft = (nodeToReplace.parent.left === nodeToReplace);
+
+    if (nodeOnLeft)  {
+      nodeToReplace.parent.left = replaceWith;
+    } else {
+      nodeToReplace.parent.right = replaceWith;
+    }
+
+    nodeToReplace.parent = null;
+    nodeToReplace.left = null;
+    nodeToReplace.right = null;
   }
 
   private createRoot(data: T): void {

@@ -23,7 +23,7 @@
     "watch": "tsc -w -p tsconfig.release.json",
     "lint": "tslint -t stylish --project \"tsconfig.json\"",
     "pretest": "npm run lint",
-    "test": "npm run test-only",
+    "test": "npm run build & npm run test-only",
     "test-only": "jest --coverage --verbose",
     "test:watch": "jest --watch --verbose"
   },
