@@ -22,10 +22,12 @@
     "no-single-line-block-comment": false,
     "one-line": false,
     "no-function-expression": false,
+    "no-constant-condition": false,
+    "no-increment-decrement": false,
+    "no-unused-expression":  false,
+    "no-multiline-string": false,
     "strict-boolean-expressions": [
-      true,
-      "allow-null-union",
-      "allow-undefined-union"
+      false
     ],
     "typedef": [
       true,

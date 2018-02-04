@@ -13,8 +13,6 @@
      // test case - delete node with one child node
      // test case - delete node with two child nodes
 
-export type ITreeNodeCompare<T> =  (a: T, b: T) => number;
-
 export interface ITreeNode<T extends { toString(): string}> {
   data: T;
   left: ITreeNode<T>;
