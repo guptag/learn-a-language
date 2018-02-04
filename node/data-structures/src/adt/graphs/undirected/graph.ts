@@ -15,13 +15,17 @@ export type IKey = StringOrNumber | ID;
       ['a', 'c']
     ]);
 
+    OR
+
   let g1:IGraph<string> = new Graph(
     [1, 2, 3],
     [
-      [1,2],
-      [2,3],
-      [1,3]
+      [1, 2],
+      [2, 3],
+      [1, 3]
     ]);
+
+    OR
 
   export interface INode {
     id: string | number;
@@ -33,9 +37,9 @@ export type IKey = StringOrNumber | ID;
     {id: 3, name: 'c'}
   ],
   [
-    [1,2],
-    [2,3],
-    [1,3]
+    [1, 2],
+    [2, 3],
+    [1, 3]
   ]);
 */
 export interface IGraph<T extends IKey> {
