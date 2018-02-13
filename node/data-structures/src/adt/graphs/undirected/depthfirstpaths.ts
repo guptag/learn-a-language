@@ -1,23 +1,22 @@
+
 import { IGraph, IKey, StringOrNumber} from './graph';
-export interface IBreadthFirstPaths {
+export interface IDepthFirstPaths {
   hasPathTo(nodeId: StringOrNumber): boolean;
   getPath(nodeId: StringOrNumber): StringOrNumber[];
 }
 
 /**
- * Implementation of the Breadth First Search
+ * Implementation of the Depth First Paths
  */
-export class BreadthFirstPaths<T extends IKey> implements IBreadthFirstPaths {
+export class DepthFirstPaths<T extends IKey> implements IDepthFirstPaths {
   private marked: Map<StringOrNumber, Boolean> = new Map();
-  private queue: StringOrNumber[] = [];
   private paths: Map<StringOrNumber, StringOrNumber> = new Map();
   private sourceNodeId: StringOrNumber;
 
   constructor(graph: IGraph<T>, nodeId: StringOrNumber) {
     this.sourceNodeId = nodeId;
     this.paths.set(this.sourceNodeId, null);
-    this.queue.push(this.sourceNodeId);
-    this.bfp(graph);
+    this.dfp(graph, this.sourceNodeId);
   }
 
   hasPathTo(nodeId: StringOrNumber): boolean {
@@ -39,16 +38,13 @@ export class BreadthFirstPaths<T extends IKey> implements IBreadthFirstPaths {
     return path;
   }
 
-  private bfp(graph: IGraph<T>) {
-    while (this.queue.length > 0) {
-      const currentNodeId: StringOrNumber = this.queue.shift();
-      this.marked.set(currentNodeId, true);
-      graph.adjList.get(currentNodeId).forEach((connectedNodeId: StringOrNumber) => {
-        if (!this.marked.get(connectedNodeId)) {
-          this.paths.set(connectedNodeId, currentNodeId);
-          this.queue.push(connectedNodeId);
-        }
-      });
-    }
+  private dfp(graph: IGraph<T>, nodeId: StringOrNumber) {
+    graph.adjList.get(nodeId).forEach((connectedNodeId: StringOrNumber) => {
+      if (!this.marked.has(connectedNodeId)) {
+        this.marked.set(connectedNodeId, true);
+        this.paths.set(connectedNodeId, nodeId);
+        this.dfp(graph, connectedNodeId);
+      }
+    });
   }
 }

@@ -44,6 +44,7 @@ export type IKey = StringOrNumber | ID;
 */
 export interface IGraph<T extends IKey> {
     nodes: T[];
+    adjList: Map<StringOrNumber, Set<StringOrNumber>>;
     addNode(node: T): void;
     addEdge(nodeOneId: StringOrNumber, nodeTwoId: StringOrNumber): void;
     getConnectedNodes(node: T): T[];
@@ -59,7 +60,7 @@ export interface IGraph<T extends IKey> {
  */
 export class Graph<T extends IKey> implements IGraph<T> {
   nodes: T[] = [];
-  private adjList: Map<StringOrNumber, Set<StringOrNumber>> = new Map();
+  adjList: Map<StringOrNumber, Set<StringOrNumber>> = new Map();
 
   constructor(nodesList?: T[], edgeList?: StringOrNumber[][]) {
     nodesList && nodesList.forEach((node: T) => this.addNode(node));

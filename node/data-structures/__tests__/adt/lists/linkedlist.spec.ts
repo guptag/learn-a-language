@@ -1,27 +1,19 @@
-import { DoublyLinkedList, IDoublyLinkedList } from '../../src/adt/doublylinkedlist';
+import { ILinkedList, LinkedList } from '../../../src/adt/lists/linkedlist';
 
-describe('double linked list tests', () => {
+describe('linked list tests', () => {
 
   it('insert test with no default head', () => {
-    const linkedList: IDoublyLinkedList<string> = new DoublyLinkedList();
+    const linkedList: ILinkedList<string> = new LinkedList();
 
     linkedList.insert('one');
     linkedList.insert('two');
     linkedList.insert('three');
 
     expect([...linkedList.print()]).toEqual(['three', 'two', 'one']);
-
-    expect(linkedList.head.data).toBe('three');
-    expect(linkedList.head.next.data).toBe('two');
-    expect(linkedList.head.next.next.data).toBe('one');
-
-    expect(linkedList.head.previous).toBe(null);
-    expect(linkedList.head.next.previous.data).toBe('three');
-    expect(linkedList.head.next.next.previous.data).toBe('two');
   });
 
   it('insert test with default head', () => {
-    const linkedList: IDoublyLinkedList<string> = new DoublyLinkedList('one');
+    const linkedList: ILinkedList<string> = new LinkedList('one');
 
     linkedList.insert('two');
     linkedList.insert('three');
@@ -30,7 +22,7 @@ describe('double linked list tests', () => {
   });
 
   it('delete test', () => {
-    const linkedList: IDoublyLinkedList<string> = new DoublyLinkedList();
+    const linkedList: ILinkedList<string> = new LinkedList();
 
     linkedList.insert('one');
     linkedList.insert('two');
@@ -48,7 +40,7 @@ describe('double linked list tests', () => {
   });
 
   it('delete test 2', () => {
-    const linkedList: IDoublyLinkedList<string> = new DoublyLinkedList();
+    const linkedList: ILinkedList<string> = new LinkedList();
 
     linkedList.insert('one');
     linkedList.insert('two');
@@ -66,7 +58,7 @@ describe('double linked list tests', () => {
   });
 
   it('find test', () => {
-    const linkedList: IDoublyLinkedList<string> = new DoublyLinkedList();
+    const linkedList: ILinkedList<string> = new LinkedList();
 
     linkedList.insert('one');
     linkedList.insert('two');
