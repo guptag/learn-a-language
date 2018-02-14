@@ -1,4 +1,4 @@
-import { Graph, IGraph } from '../../../../src/adt/graphs/undirected/graph';
+import { Graph, IGraph } from './graph';
 
 interface IAirport {
   id: string;

@@ -1,5 +1,5 @@
-import { DepthFirstSearch, IDepthFirstSearch } from '../../../../src/adt/graphs/undirected/depthfirstsearch';
-import { Graph, IGraph } from '../../../../src/adt/graphs/undirected/graph';
+import { DepthFirstSearch, IDepthFirstSearch } from './depthfirstsearch';
+import { Graph, IGraph } from './graph';
 
 interface IAirport {
   id: string;

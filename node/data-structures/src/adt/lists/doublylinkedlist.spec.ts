@@ -1,4 +1,4 @@
-import { DoublyLinkedList, IDoublyLinkedList } from '../../../src/adt/lists/doublylinkedlist';
+import { DoublyLinkedList, IDoublyLinkedList } from './doublylinkedlist';
 
 describe('double linked list tests', () => {
 

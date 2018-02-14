@@ -1,4 +1,4 @@
-import { ILinkedList, LinkedList } from '../../../src/adt/lists/linkedlist';
+import { ILinkedList, LinkedList } from './linkedlist';
 
 describe('linked list tests', () => {
 
