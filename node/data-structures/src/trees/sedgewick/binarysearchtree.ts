@@ -23,8 +23,8 @@ export interface ITreeNode<T extends { toString(): string}> {
 export interface ITree<T extends { toString(): string}> {
   root: ITreeNode<T>;
   find(data: T): ITreeNode<T> | null;
-  add(data: T): void;
-  remove(data: T): void;
+  add(data: T): ITree<T>;
+  remove(data: T): ITree<T>;
   clear(): void;
   getSize(): number;
   height(): number;
@@ -72,23 +72,25 @@ export class BinarySearchTree<T> implements ITree<T> {
     return findFromNode(data, this.root);
   }
 
-  add(data: T): void {
+  add(data: T): ITree<T> {
     if (!this.root) {
       this.createRoot(data);
-      return;
+      return this;
     }
 
     this.addToNode(data, this.root);
+
+    return this;
   }
 
-  remove(data: T): void {
+  remove(data: T): ITree<T> {
     const nodeToDelete = this.find(data);
 
-    if (!nodeToDelete) { return; }
+    if (!nodeToDelete) { return this; }
 
     if (nodeToDelete === this.root) {
       this.clear();
-      return;
+      return this;
     }
 
     if (!nodeToDelete.left && !nodeToDelete.right) { //no child nodes
@@ -116,6 +118,8 @@ export class BinarySearchTree<T> implements ITree<T> {
       // replace the current node's data with successor node's data
       nodeToDelete.data = successorData;
     }
+
+    return this;
   }
 
   clear(): void {

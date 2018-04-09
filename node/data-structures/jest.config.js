@@ -18,6 +18,7 @@ module.exports = {
     'src/**/*.{ts,tsx,js,jsx}',
     '!src/**/*.d.ts',
   ],
+  testPathIgnorePatterns: ["/node_modules/"],
   mapCoverage: true,
   "globals": {
     "ts-jest": {
