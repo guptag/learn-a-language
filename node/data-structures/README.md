@@ -12,3 +12,7 @@ Boilerplate is from https://github.com/jsynowiec/node-typescript-boilerplate
 + `test` - builds and run tests,
 + `test:watch` - interactive watch mode to automatically re-run tests
 
+// Debug Tests
+  * Add 'debugger;' to the code.
+  * vscode -> debug -> start debugging (or f5)
+
