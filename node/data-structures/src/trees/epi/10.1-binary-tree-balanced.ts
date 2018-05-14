@@ -1,26 +1,38 @@
+/**
+ * Implement a function to check if a binary tree is balanced. A tree is balanced if the heights of the two subtrees of any node
+ * never differ by more than one.
+ *
+ * Bruteforce:
+ *  At every level, recursively get the height of the tree for both the nodes and determine whether the tree is balanced or not.
+ *  This approach calculates the height of the same nodes repeatedly.
+ *
+ * Optimized:
+ *   When checking the height of the tree, also do the diff and return the state along with the height
+ *
+ */
 
-import { ITreeNode } from '../sedgewick/binarysearchtree';
+import { IBinaryTreeNode } from '../adt/binary-tree';
 
-interface IBalancedMetadata {
+interface ITreeHeight {
     height: number;
     isBalanced: boolean;
 }
 
-export function isBinaryTreeBalanced<T>(treeNode: ITreeNode<T>): boolean {
-    return getBalancedMetadata(treeNode).isBalanced;
+export function isBinaryTreeBalanced<T>(treeNode: IBinaryTreeNode<T>): boolean {
+    return getHeight(treeNode).isBalanced;
 }
 
-function getBalancedMetadata<T>(node: ITreeNode<T>): IBalancedMetadata {
+function getHeight<T>(node: IBinaryTreeNode<T>): ITreeHeight {
    if (node === null) {
        return { height: 0, isBalanced: true};
    }
 
-   const leftTreeData = getBalancedMetadata(node.left);
+   const leftTreeData = getHeight(node.left);
    if (!leftTreeData.isBalanced) {
        return { height: 0, isBalanced: false};
    }
 
-   const rightTreeData = getBalancedMetadata(node.right);
+   const rightTreeData = getHeight(node.right);
    if (!rightTreeData.isBalanced) {
        return { height: 0, isBalanced: false };
    }

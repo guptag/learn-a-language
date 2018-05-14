@@ -13,18 +13,15 @@
      // test case - delete node with one child node
      // test case - delete node with two child nodes
 
-export interface ITreeNode<T extends { toString(): string}> {
-  data: T;
-  left: ITreeNode<T>;
-  right: ITreeNode<T>;
-  parent: ITreeNode<T>;
-}
+import { IBinaryTreeNode } from './binary-tree';
 
-export interface ITree<T extends { toString(): string}> {
-  root: ITreeNode<T>;
-  find(data: T): ITreeNode<T> | null;
-  add(data: T): ITree<T>;
-  remove(data: T): ITree<T>;
+export { IBinaryTreeNode } from './binary-tree';
+
+export interface IBinarySearchTree<T extends { toString(): string}> {
+  root: IBinaryTreeNode<T>;
+  find(data: T): IBinaryTreeNode<T> | null;
+  add(data: T): IBinarySearchTree<T>;
+  remove(data: T): IBinarySearchTree<T>;
   clear(): void;
   getSize(): number;
   height(): number;
@@ -44,8 +41,8 @@ function defaultCompare<T>(a: T, b: T): number {
 /**
  * Implementation of the Binary Search Tree data structure
  */
-export class BinarySearchTree<T> implements ITree<T> {
-  root: ITreeNode<T>;
+export class BinarySearchTree<T> implements IBinarySearchTree<T> {
+  root: IBinaryTreeNode<T>;
   compareFn: ICompare<T> = defaultCompare;
 
   constructor(data?: T, compareFn?: ICompare<T>) {
@@ -58,21 +55,22 @@ export class BinarySearchTree<T> implements ITree<T> {
     }
   }
 
-  find(data: T): ITreeNode<T> | null {
-    const findFromNode: (dataToFind: T, current: ITreeNode<T>) => ITreeNode<T>  = (dataToFind: T, current: ITreeNode<T>) => {
-      if (!current) {
-        return null;
-      } else {
-        const compareVal: number = this.compareFn(dataToFind, current.data);
-        if (compareVal === 0) { return current; }
-        else if (compareVal < 0) { return findFromNode(dataToFind, current.left); }
-        else { return findFromNode(dataToFind, current.right); }
-      }
-    };
+  find(data: T): IBinaryTreeNode<T> | null {
+    const findFromNode: (dataToFind: T, current: IBinaryTreeNode<T>) => IBinaryTreeNode<T>  =
+      (dataToFind: T, current: IBinaryTreeNode<T>) => {
+        if (!current) {
+          return null;
+        } else {
+          const compareVal: number = this.compareFn(dataToFind, current.data);
+          if (compareVal === 0) { return current; }
+          else if (compareVal < 0) { return findFromNode(dataToFind, current.left); }
+          else { return findFromNode(dataToFind, current.right); }
+        }
+      };
     return findFromNode(data, this.root);
   }
 
-  add(data: T): ITree<T> {
+  add(data: T): IBinarySearchTree<T> {
     if (!this.root) {
       this.createRoot(data);
       return this;
@@ -83,7 +81,7 @@ export class BinarySearchTree<T> implements ITree<T> {
     return this;
   }
 
-  remove(data: T): ITree<T> {
+  remove(data: T): IBinarySearchTree<T> {
     const nodeToDelete = this.find(data);
 
     if (!nodeToDelete) { return this; }
@@ -131,7 +129,7 @@ export class BinarySearchTree<T> implements ITree<T> {
   }
 
   height(): number {
-    const getHeightFromNode: (node: ITreeNode<T>) => number = (node: ITreeNode<T>) => {
+    const getHeightFromNode: (node: IBinaryTreeNode<T>) => number = (node: IBinaryTreeNode<T>) => {
       if (!node) { return 0; }
       return 1 + Math.max(getHeightFromNode(node.left), getHeightFromNode(node.right));
     };
@@ -139,7 +137,7 @@ export class BinarySearchTree<T> implements ITree<T> {
   }
 
   *traverseInOrder(): IterableIterator<string> {
-    const traverse = function* (node: ITreeNode<T>): IterableIterator<string>  {
+    const traverse = function* (node: IBinaryTreeNode<T>): IterableIterator<string>  {
        if (node) {
         yield* traverse(node.left);
         yield node.data.toString();
@@ -150,7 +148,7 @@ export class BinarySearchTree<T> implements ITree<T> {
   }
 
   *traversePreOrder(): IterableIterator<string> {
-    const traverse = function* (node: ITreeNode<T>): IterableIterator<string>  {
+    const traverse = function* (node: IBinaryTreeNode<T>): IterableIterator<string>  {
       if (node) {
        yield node.data.toString();
        yield* traverse(node.left);
@@ -161,7 +159,7 @@ export class BinarySearchTree<T> implements ITree<T> {
   }
 
   *traversePostOrder(): IterableIterator<string> {
-    const traverse = function* (node: ITreeNode<T>): IterableIterator<string>  {
+    const traverse = function* (node: IBinaryTreeNode<T>): IterableIterator<string>  {
       if (node) {
        yield* traverse(node.left);
        yield* traverse(node.right);
@@ -171,7 +169,7 @@ export class BinarySearchTree<T> implements ITree<T> {
     traverse(this.root);
   }
 
-  private addToNode(data: T, parent: ITreeNode<T>) {
+  private addToNode(data: T, parent: IBinaryTreeNode<T>) {
     if (this.compareFn(data, parent.data) <= 0) {
       if (parent.left) {
         this.addToNode(data, parent.left);
@@ -187,7 +185,7 @@ export class BinarySearchTree<T> implements ITree<T> {
     }
   }
 
-  private replaceNode(nodeToReplace: ITreeNode<T>, replaceWith: ITreeNode<T>) {
+  private replaceNode(nodeToReplace: IBinaryTreeNode<T>, replaceWith: IBinaryTreeNode<T>) {
     if (!nodeToReplace || !nodeToReplace.parent) { return; }
 
     const nodeOnLeft = (nodeToReplace.parent.left === nodeToReplace);
@@ -209,7 +207,7 @@ export class BinarySearchTree<T> implements ITree<T> {
     }
   }
 
-  private createNode(data: T, parent: ITreeNode<T>): ITreeNode<T> {
+  private createNode(data: T, parent: IBinaryTreeNode<T>): IBinaryTreeNode<T> {
     return {
       data: data,
       parent: parent,

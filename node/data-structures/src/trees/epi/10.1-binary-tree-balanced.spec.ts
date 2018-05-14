@@ -1,10 +1,10 @@
 
-import { BinarySearchTree, ITree } from '../sedgewick/binarysearchtree';
+import { BinarySearchTree, IBinarySearchTree } from '../adt/binary-search-tree';
 import { isBinaryTreeBalanced } from './10.1-binary-tree-balanced';
 
 describe('un-balanced binary tree tests', () => {
   it('test1', () => {
-    const binaryTree: ITree<number> =
+    const binaryTree: IBinarySearchTree<number> =
       new BinarySearchTree<number>(5)
             .add(7)
             .add(10)
@@ -13,7 +13,7 @@ describe('un-balanced binary tree tests', () => {
   });
 
   it('test2', () => {
-    const binaryTree: ITree<number> =
+    const binaryTree: IBinarySearchTree<number> =
       new BinarySearchTree<number>(27)
         .add(20)
         .add(10)
@@ -23,7 +23,7 @@ describe('un-balanced binary tree tests', () => {
   });
 
   it('test3', () => {
-    const binaryTree: ITree<number> =
+    const binaryTree: IBinarySearchTree<number> =
         new BinarySearchTree<number>(5)
           .add(27)
           .add(20)
@@ -33,7 +33,7 @@ describe('un-balanced binary tree tests', () => {
   });
 
   it('test4', () => {
-    const binaryTree: ITree<number> =
+    const binaryTree: IBinarySearchTree<number> =
         new BinarySearchTree<number>(17)
           .add(10)
           .add(5)
@@ -49,7 +49,7 @@ describe('un-balanced binary tree tests', () => {
 
 describe('balanced binary tree tests', () => {
     it('test1', () => {
-      const binaryTree: ITree<number> =
+      const binaryTree: IBinarySearchTree<number> =
         new BinarySearchTree<number>(17)
           .add(10)
           .add(27);
@@ -57,7 +57,7 @@ describe('balanced binary tree tests', () => {
     });
 
     it('test2', () => {
-      const binaryTree: ITree<number> =
+      const binaryTree: IBinarySearchTree<number> =
         new BinarySearchTree<number>(17)
             .add(10)
             .add(5)
@@ -67,7 +67,7 @@ describe('balanced binary tree tests', () => {
     });
 
     it('test3', () => {
-      const binaryTree: ITree<number> =
+      const binaryTree: IBinarySearchTree<number> =
         new BinarySearchTree<number>(17)
             .add(10)
             .add(5)
@@ -79,7 +79,7 @@ describe('balanced binary tree tests', () => {
     });
 
     it('test4', () => {
-        const binaryTree: ITree<number> =
+        const binaryTree: IBinarySearchTree<number> =
           new BinarySearchTree<number>(17)
             .add(10)
             .add(5)
