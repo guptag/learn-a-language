@@ -15,4 +15,9 @@ Boilerplate is from https://github.com/jsynowiec/node-typescript-boilerplate
 // Debug Tests
   * Add 'debugger;' to the code.
   * vscode -> debug -> start debugging (or f5)
+  
+  
+ ## Inspiration
+ 
+ * https://github.com/trekhleb/javascript-algorithms
 
