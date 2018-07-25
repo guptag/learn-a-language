@@ -5,15 +5,15 @@
  *
  * Several approaches to solve this problem
  *  - Inorder traversal path should be in sorted order
- *  - Use dst at every node to check that all nodes in the
- *       left tree < Current Node < all nodes in the right tree (very inefficient as we repeat the same operations several times)
- *  - Calculate Min value of the left branch and max value of the right branch and
+ *  - Use dst at every node to check that all nodes
+ *       in the left tree < Current Node < all nodes in the right tree (very inefficient as we repeat the same operations several times)
+ *  - Calculate Min value of every node based on the subtree and validate the BST checks (single tree scan with additional memory)
  *
  */
 
 import { IBinaryTreeNode } from '../adt/binary-tree';
 
-export function isBinaryTreeBSTFromInorderTraversal<T>(root: IBinaryTreeNode<T>): boolean {
+export function isBinaryTreeBSTWithInorderTraversal<T>(root: IBinaryTreeNode<T>): boolean {
   const inorderTraversal = function* (node: IBinaryTreeNode<T>): IterableIterator<T>  {
     if (node) {
       yield* inorderTraversal(node.left);
@@ -33,7 +33,7 @@ export function isBinaryTreeBSTFromInorderTraversal<T>(root: IBinaryTreeNode<T>)
   return isBST;
 }
 
-export function isBinaryTreeBSTFromRecursion<T>(root: IBinaryTreeNode<T>): boolean {
+export function isBinaryTreeBSTWithRecursion<T>(root: IBinaryTreeNode<T>): boolean {
    // Checks if a condition is satisfied for the entire tree
    const doesTreeSatisfyCondition: (node: IBinaryTreeNode<T>, compareFn: (data: T) => boolean) => boolean =
     (node: IBinaryTreeNode<T>, compareFn: (data: T) => boolean) => {
@@ -64,3 +64,7 @@ export function isBinaryTreeBSTFromRecursion<T>(root: IBinaryTreeNode<T>): boole
 
    return isTreeBST(root);
 }
+
+/* export function isBinaryTreeBSTWithMinMax<T>(root: IBinaryTreeNode<T>): boolean {
+
+} */

@@ -9,8 +9,8 @@ export type IKey = StringOrNumber | ID;
 
 /*
   let g:IGraph<string> = new Graph(
-    ['a', 'b', 'c'],
-    [
+    ['a', 'b', 'c'],  // nodes
+    [                 // edges
       ['a', 'b'],
       ['a', 'c']
     ]);
