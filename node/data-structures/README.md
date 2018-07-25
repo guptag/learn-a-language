@@ -15,4 +15,10 @@ Boilerplate is from https://github.com/jsynowiec/node-typescript-boilerplate
 // Debug Tests
   * Add 'debugger;' to the code.
   * vscode -> debug -> start debugging (or f5)
+  
+  
+ ## Interesting Data Structures (todo)
+ 
+ * https://github.com/trekhleb/javascript-algorithms
+ * https://en.wikipedia.org/wiki/Log-structured_merge-tree
 
