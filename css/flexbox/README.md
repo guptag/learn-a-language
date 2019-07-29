@@ -6,6 +6,7 @@
 ## Articles
  * https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties?
  * https://medium.com/@js_tut/the-complete-css-flex-box-tutorial-d17971950bdc
+ * https://medium.com/@js_tut/flexbox-the-animated-tutorial-8075cbe4c1b2
  * https://www.freecodecamp.org/news/the-ultimate-guide-to-flexbox-learning-through-examples-8c90248d4676/
  * https://css-tricks.com/snippets/css/a-guide-to-flexbox/
  
