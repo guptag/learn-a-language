@@ -13,32 +13,32 @@
 // test case - delete node with one child node
 // test case - delete node with two child nodes
 
-import { IBinaryTreeNode } from './binary-tree'
+import { IBinaryTreeNode } from './binary-tree';
 
-export { IBinaryTreeNode } from './binary-tree'
+export { IBinaryTreeNode } from './binary-tree';
 
 export interface IBinarySearchTree<T extends { toString(): string }> {
-    root: IBinaryTreeNode<T>
-    find(data: T): IBinaryTreeNode<T> | null
-    add(data: T): IBinarySearchTree<T>
-    remove(data: T): IBinarySearchTree<T>
-    clear(): void
-    getSize(): number
-    height(): number
-    traverseInOrder(): IterableIterator<string>
-    traversePreOrder(): IterableIterator<string>
-    traversePostOrder(): IterableIterator<string>
+    root: IBinaryTreeNode<T>;
+    find(data: T): IBinaryTreeNode<T> | null;
+    add(data: T): IBinarySearchTree<T>;
+    remove(data: T): IBinarySearchTree<T>;
+    clear(): void;
+    getSize(): number;
+    height(): number;
+    traverseInOrder(): IterableIterator<string>;
+    traversePreOrder(): IterableIterator<string>;
+    traversePostOrder(): IterableIterator<string>;
 }
 
-export type ICompare<T> = (a: T, b: T) => number
+export type ICompare<T> = (a: T, b: T) => number;
 
 function defaultCompare<T>(a: T, b: T): number {
     if (a < b) {
-        return -1
+        return -1;
     } else if (a === b) {
-        return 0
+        return 0;
     } else {
-        return 1
+        return 1;
     }
 }
 
@@ -46,16 +46,16 @@ function defaultCompare<T>(a: T, b: T): number {
  * Implementation of the Binary Search Tree data structure
  */
 export class BinarySearchTree<T> implements IBinarySearchTree<T> {
-    root: IBinaryTreeNode<T>
-    compareFn: ICompare<T> = defaultCompare
+    root: IBinaryTreeNode<T>;
+    compareFn: ICompare<T> = defaultCompare;
 
     constructor(data?: T, compareFn?: ICompare<T>) {
         if (data) {
-            this.createRoot(data)
+            this.createRoot(data);
         }
 
         if (compareFn) {
-            this.compareFn = compareFn
+            this.compareFn = compareFn;
         }
     }
 
@@ -68,87 +68,87 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
             current: IBinaryTreeNode<T>
         ) => {
             if (!current) {
-                return null
+                return null;
             } else {
                 const compareVal: number = this.compareFn(
                     dataToFind,
                     current.data
-                )
+                );
                 if (compareVal === 0) {
-                    return current
+                    return current;
                 } else if (compareVal < 0) {
-                    return findFromNode(dataToFind, current.left)
+                    return findFromNode(dataToFind, current.left);
                 } else {
-                    return findFromNode(dataToFind, current.right)
+                    return findFromNode(dataToFind, current.right);
                 }
             }
-        }
-        return findFromNode(data, this.root)
+        };
+        return findFromNode(data, this.root);
     }
 
     add(data: T): IBinarySearchTree<T> {
         if (!this.root) {
-            this.createRoot(data)
-            return this
+            this.createRoot(data);
+            return this;
         }
 
-        this.addToNode(data, this.root)
+        this.addToNode(data, this.root);
 
-        return this
+        return this;
     }
 
     remove(data: T): IBinarySearchTree<T> {
-        const nodeToDelete = this.find(data)
+        const nodeToDelete = this.find(data);
 
         if (!nodeToDelete) {
-            return this
+            return this;
         }
 
         if (nodeToDelete === this.root) {
-            this.clear()
-            return this
+            this.clear();
+            return this;
         }
 
         if (!nodeToDelete.left && !nodeToDelete.right) {
             //no child nodes
-            this.replaceNode(nodeToDelete, null)
+            this.replaceNode(nodeToDelete, null);
         } else if (
             (nodeToDelete.left &&
                 !nodeToDelete.right) /* has one child node */ ||
             (!nodeToDelete.left && nodeToDelete.right)
         ) {
-            const childNode = nodeToDelete.left || nodeToDelete.right
-            this.replaceNode(nodeToDelete, childNode)
+            const childNode = nodeToDelete.left || nodeToDelete.right;
+            this.replaceNode(nodeToDelete, childNode);
         } else {
             /* has two child nodes */
             // find the inorder successor for the node to delete
-            let successor = nodeToDelete.right
+            let successor = nodeToDelete.right;
             while (successor != null) {
                 if (successor.left) {
-                    successor = successor.left
+                    successor = successor.left;
                 } else {
-                    break
+                    break;
                 }
             }
 
-            const successorData: T = successor.data
+            const successorData: T = successor.data;
 
             // remove the successor (will have either zero or one child node)
-            this.remove(successorData)
+            this.remove(successorData);
 
             // replace the current node's data with successor node's data
-            nodeToDelete.data = successorData
+            nodeToDelete.data = successorData;
         }
 
-        return this
+        return this;
     }
 
     clear(): void {
-        this.root = null
+        this.root = null;
     }
 
     getSize(): number {
-        return [...this.traverseInOrder()].length
+        return [...this.traverseInOrder()].length;
     }
 
     height(): number {
@@ -156,7 +156,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
             node: IBinaryTreeNode<T>
         ) => {
             if (!node) {
-                return 0
+                return 0;
             }
             return (
                 1 +
@@ -164,9 +164,9 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
                     getHeightFromNode(node.left),
                     getHeightFromNode(node.right)
                 )
-            )
-        }
-        return getHeightFromNode(this.root)
+            );
+        };
+        return getHeightFromNode(this.root);
     }
 
     *traverseInOrder(): IterableIterator<string> {
@@ -174,12 +174,12 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
             node: IBinaryTreeNode<T>
         ): IterableIterator<string> {
             if (node) {
-                yield* traverse(node.left)
-                yield node.data.toString()
-                yield* traverse(node.right)
+                yield* traverse(node.left);
+                yield node.data.toString();
+                yield* traverse(node.right);
             }
-        }
-        traverse(this.root)
+        };
+        traverse(this.root);
     }
 
     *traversePreOrder(): IterableIterator<string> {
@@ -187,12 +187,12 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
             node: IBinaryTreeNode<T>
         ): IterableIterator<string> {
             if (node) {
-                yield node.data.toString()
-                yield* traverse(node.left)
-                yield* traverse(node.right)
+                yield node.data.toString();
+                yield* traverse(node.left);
+                yield* traverse(node.right);
             }
-        }
-        traverse(this.root)
+        };
+        traverse(this.root);
     }
 
     *traversePostOrder(): IterableIterator<string> {
@@ -200,26 +200,26 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
             node: IBinaryTreeNode<T>
         ): IterableIterator<string> {
             if (node) {
-                yield* traverse(node.left)
-                yield* traverse(node.right)
-                yield node.data.toString()
+                yield* traverse(node.left);
+                yield* traverse(node.right);
+                yield node.data.toString();
             }
-        }
-        traverse(this.root)
+        };
+        traverse(this.root);
     }
 
     private addToNode(data: T, parent: IBinaryTreeNode<T>) {
         if (this.compareFn(data, parent.data) <= 0) {
             if (parent.left) {
-                this.addToNode(data, parent.left)
+                this.addToNode(data, parent.left);
             } else {
-                parent.left = this.createNode(data, parent)
+                parent.left = this.createNode(data, parent);
             }
         } else {
             if (parent.right) {
-                this.addToNode(data, parent.right)
+                this.addToNode(data, parent.right);
             } else {
-                parent.right = this.createNode(data, parent)
+                parent.right = this.createNode(data, parent);
             }
         }
     }
@@ -229,25 +229,25 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
         replaceWith: IBinaryTreeNode<T>
     ) {
         if (!nodeToReplace || !nodeToReplace.parent) {
-            return
+            return;
         }
 
-        const nodeOnLeft = nodeToReplace.parent.left === nodeToReplace
+        const nodeOnLeft = nodeToReplace.parent.left === nodeToReplace;
 
         if (nodeOnLeft) {
-            nodeToReplace.parent.left = replaceWith
+            nodeToReplace.parent.left = replaceWith;
         } else {
-            nodeToReplace.parent.right = replaceWith
+            nodeToReplace.parent.right = replaceWith;
         }
 
-        nodeToReplace.parent = null
-        nodeToReplace.left = null
-        nodeToReplace.right = null
+        nodeToReplace.parent = null;
+        nodeToReplace.left = null;
+        nodeToReplace.right = null;
     }
 
     private createRoot(data: T): void {
         if (data) {
-            this.root = this.createNode(data, null)
+            this.root = this.createNode(data, null);
         }
     }
 
@@ -260,6 +260,6 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
             parent: parent,
             left: null,
             right: null,
-        }
+        };
     }
 }

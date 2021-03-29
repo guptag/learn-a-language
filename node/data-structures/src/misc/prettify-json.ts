@@ -31,9 +31,9 @@ Output :
 */
 
 export function prettifyJSON(inputStr: string): string {
-    inputStr = inputStr.trim()
-    const output = []
-    const indent = []
+    inputStr = inputStr.trim();
+    const output = [];
+    const indent = [];
 
     // handle "{", "}", "[", "]", ":", ","
     // '{', '[' -> Add new line, Add indent, Add char, add new line, push indent, add indent
@@ -43,7 +43,7 @@ export function prettifyJSON(inputStr: string): string {
     // default -> add char
 
     for (let index = 0; index < inputStr.length; index++) {
-        const char = inputStr.charAt(index)
+        const char = inputStr.charAt(index);
         // const nextChar =  index < inputStr.length - 1 ? inputStr.charAt(index + 1) : '';
         // if (index === 0) {
         // output.push('\n');
@@ -52,41 +52,41 @@ export function prettifyJSON(inputStr: string): string {
         switch (char) {
             case '{':
             case '[':
-                output.push('\n')
+                output.push('\n');
 
-                output.push(indent.join(''))
-                output.push(char)
-                output.push('\n')
+                output.push(indent.join(''));
+                output.push(char);
+                output.push('\n');
 
-                indent.push(' ')
-                indent.push(' ')
-                output.push(indent.join(''))
-                break
+                indent.push(' ');
+                indent.push(' ');
+                output.push(indent.join(''));
+                break;
             case '}':
             case ']':
-                output.push('\n')
+                output.push('\n');
 
-                indent.pop()
-                indent.pop()
-                output.push(indent.join(''))
+                indent.pop();
+                indent.pop();
+                output.push(indent.join(''));
 
-                output.push(char)
-                break
+                output.push(char);
+                break;
             case ',':
-                output.push(char)
-                output.push('\n')
-                output.push(indent.join(''))
-                break
+                output.push(char);
+                output.push('\n');
+                output.push(indent.join(''));
+                break;
             case ':':
-                output.push(':')
+                output.push(':');
                 // if (nextChar === '[' || nextChar === '{') {
                 // output.push('\n');
                 // }
-                break
+                break;
             default:
-                output.push(char)
-                break
+                output.push(char);
+                break;
         }
     }
-    return output.join('')
+    return output.join('');
 }

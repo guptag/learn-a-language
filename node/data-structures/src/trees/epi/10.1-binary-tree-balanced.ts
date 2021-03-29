@@ -11,36 +11,36 @@
  *
  */
 
-import { IBinaryTreeNode } from '../adt/binary-tree'
+import { IBinaryTreeNode } from '../adt/binary-tree';
 
 interface ITreeHeight {
-    height: number
-    isBalanced: boolean
+    height: number;
+    isBalanced: boolean;
 }
 
 export function isBinaryTreeBalanced<T>(treeNode: IBinaryTreeNode<T>): boolean {
-    return getHeight(treeNode).isBalanced
+    return getHeight(treeNode).isBalanced;
 }
 
 function getHeight<T>(node: IBinaryTreeNode<T>): ITreeHeight {
     if (node === null) {
-        return { height: 0, isBalanced: true }
+        return { height: 0, isBalanced: true };
     }
 
-    const leftTreeData = getHeight(node.left)
+    const leftTreeData = getHeight(node.left);
     if (!leftTreeData.isBalanced) {
-        return { height: 0, isBalanced: false }
+        return { height: 0, isBalanced: false };
     }
 
-    const rightTreeData = getHeight(node.right)
+    const rightTreeData = getHeight(node.right);
     if (!rightTreeData.isBalanced) {
-        return { height: 0, isBalanced: false }
+        return { height: 0, isBalanced: false };
     }
 
-    const heightDiff = Math.abs(leftTreeData.height - rightTreeData.height)
+    const heightDiff = Math.abs(leftTreeData.height - rightTreeData.height);
 
     return {
         isBalanced: heightDiff <= 1,
         height: 1 + Math.max(leftTreeData.height, rightTreeData.height),
-    }
+    };
 }

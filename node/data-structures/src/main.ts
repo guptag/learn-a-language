@@ -21,7 +21,7 @@ function delayedHello(
     return new Promise<string>(
         (resolve: (value?: string | PromiseLike<string>) => void) =>
             setTimeout(() => resolve(`Hello, ${name}`), delay)
-    )
+    );
 }
 
 // Below are examples of using TSLint errors suppression
@@ -30,5 +30,5 @@ function delayedHello(
 export async function greeter(name) {
     // tslint:disable-line typedef
     // tslint:disable-next-line no-unsafe-any
-    return await delayedHello(name, Delays.Long)
+    return await delayedHello(name, Delays.Long);
 }

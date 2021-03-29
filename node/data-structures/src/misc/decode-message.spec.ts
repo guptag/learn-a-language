@@ -1,4 +1,4 @@
-import { decodeMessage } from './decode-message'
+import { decodeMessage } from './decode-message';
 
 describe('decodeMessage', () => {
     // Assert if setTimeout was called properly
@@ -7,7 +7,7 @@ describe('decodeMessage', () => {
             ['I', 'B', 'C', 'A', 'K', 'E', 'A'],
             ['D', 'R', 'F', 'C', 'A', 'E', 'A'],
             ['G', 'H', 'O', 'E', 'L', 'A', 'D'],
-        ]
-        expect(decodeMessage(code)).toBe('IROCKED')
-    })
-})
+        ];
+        expect(decodeMessage(code)).toBe('IROCKED');
+    });
+});

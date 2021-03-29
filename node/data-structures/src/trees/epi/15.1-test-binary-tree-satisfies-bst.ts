@@ -11,7 +11,7 @@
  *
  */
 
-import { IBinaryTreeNode } from '../adt/binary-tree'
+import { IBinaryTreeNode } from '../adt/binary-tree';
 
 export function isBinaryTreeBSTWithInorderTraversal<T>(
     root: IBinaryTreeNode<T>
@@ -20,21 +20,21 @@ export function isBinaryTreeBSTWithInorderTraversal<T>(
         node: IBinaryTreeNode<T>
     ): IterableIterator<T> {
         if (node) {
-            yield* inorderTraversal(node.left)
-            yield node.data
-            yield* inorderTraversal(node.right)
+            yield* inorderTraversal(node.left);
+            yield node.data;
+            yield* inorderTraversal(node.right);
         }
-    }
-    const traversedList: T[] = Array.from(inorderTraversal(root))
+    };
+    const traversedList: T[] = Array.from(inorderTraversal(root));
 
-    let isBST: boolean = true
+    let isBST: boolean = true;
     traversedList.forEach((dataItem: T, index: number) => {
         if (index > 0 && isBST && dataItem < traversedList[index - 1]) {
-            isBST = false
+            isBST = false;
         }
-    })
+    });
 
-    return isBST
+    return isBST;
 }
 
 export function isBinaryTreeBSTWithRecursion<T>(
@@ -49,18 +49,18 @@ export function isBinaryTreeBSTWithRecursion<T>(
         compareFn: (data: T) => boolean
     ) => {
         if (!node) {
-            return true
+            return true;
         }
 
         if (!compareFn(node.data)) {
-            return false
+            return false;
         }
 
         return (
             doesTreeSatisfyCondition(node.left, compareFn) &&
             doesTreeSatisfyCondition(node.right, compareFn)
-        )
-    }
+        );
+    };
 
     // Checks if all nodes in the left tree <= root value < all nodes in the right AND
     // recursively verifies this for left and right nodes
@@ -74,7 +74,7 @@ export function isBinaryTreeBSTWithRecursion<T>(
                 (childNodeData: T) => childNodeData <= node.data
             )
         ) {
-            return false
+            return false;
         }
 
         if (
@@ -84,16 +84,16 @@ export function isBinaryTreeBSTWithRecursion<T>(
                 (childNodeData: T) => childNodeData > node.data
             )
         ) {
-            return false
+            return false;
         }
 
         return (
             ((node.left && isTreeBST(node.left)) || true) &&
             ((node.right && isTreeBST(node.right)) || true)
-        )
-    }
+        );
+    };
 
-    return isTreeBST(root)
+    return isTreeBST(root);
 }
 
 /* export function isBinaryTreeBSTWithMinMax<T>(root: IBinaryTreeNode<T>): boolean {

@@ -8,39 +8,39 @@
 // add
 
 export interface IBinaryTreeNode<T extends { toString(): string }> {
-    data: T
-    left: IBinaryTreeNode<T>
-    right: IBinaryTreeNode<T>
-    parent: IBinaryTreeNode<T>
+    data: T;
+    left: IBinaryTreeNode<T>;
+    right: IBinaryTreeNode<T>;
+    parent: IBinaryTreeNode<T>;
 }
 
 export interface IBinaryTree<T extends { toString(): string }> {
-    root: IBinaryTreeNode<T>
-    find(data: T): IBinaryTreeNode<T> | null
+    root: IBinaryTreeNode<T>;
+    find(data: T): IBinaryTreeNode<T> | null;
     add(
         data: T,
         parentNode: IBinaryTreeNode<T>,
         direction: Direction
-    ): IBinaryTreeNode<T>
-    clear(): void
-    getSize(): number
-    height(): number
-    traverseInOrder(): IterableIterator<string>
-    traversePreOrder(): IterableIterator<string>
-    traversePostOrder(): IterableIterator<string>
+    ): IBinaryTreeNode<T>;
+    clear(): void;
+    getSize(): number;
+    height(): number;
+    traverseInOrder(): IterableIterator<string>;
+    traversePreOrder(): IterableIterator<string>;
+    traversePostOrder(): IterableIterator<string>;
 }
 
-export type Direction = 'left' | 'right'
+export type Direction = 'left' | 'right';
 
 /**
  * Implementation of the Binary Tree data structure
  */
 export class BinaryTree<T> implements IBinaryTree<T> {
-    root: IBinaryTreeNode<T>
+    root: IBinaryTreeNode<T>;
 
     constructor(data?: T) {
         if (data) {
-            this.createRoot(data)
+            this.createRoot(data);
         }
     }
 
@@ -53,27 +53,27 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             current: IBinaryTreeNode<T>
         ) => {
             if (!current) {
-                return null
+                return null;
             }
 
             if (current.data === dataToFind) {
-                return current
+                return current;
             }
 
-            let foundNode = findFromNode(dataToFind, current.left)
+            let foundNode = findFromNode(dataToFind, current.left);
             if (foundNode) {
-                return foundNode
+                return foundNode;
             }
 
-            foundNode = findFromNode(dataToFind, current.right)
+            foundNode = findFromNode(dataToFind, current.right);
             if (foundNode) {
-                return foundNode
+                return foundNode;
             }
 
-            return null
-        }
+            return null;
+        };
 
-        return findFromNode(data, this.root)
+        return findFromNode(data, this.root);
     }
 
     add(
@@ -82,32 +82,32 @@ export class BinaryTree<T> implements IBinaryTree<T> {
         direction: Direction
     ): IBinaryTreeNode<T> {
         if (!this.root && !parentNode) {
-            this.createRoot(data)
-            return this.root
+            this.createRoot(data);
+            return this.root;
         }
 
         if (!parentNode) {
-            throw Error("parentNode shouldn't be null")
+            throw Error("parentNode shouldn't be null");
         }
 
         if (
             (parentNode.left && direction === 'left') ||
             (parentNode.right && direction === 'right')
         ) {
-            throw Error(`${direction}  Node already exists`)
+            throw Error(`${direction}  Node already exists`);
         }
 
-        parentNode[direction] = this.createNode(data, parentNode)
+        parentNode[direction] = this.createNode(data, parentNode);
 
-        return parentNode[direction]
+        return parentNode[direction];
     }
 
     clear(): void {
-        this.root = null
+        this.root = null;
     }
 
     getSize(): number {
-        return [...this.traverseInOrder()].length
+        return [...this.traverseInOrder()].length;
     }
 
     height(): number {
@@ -115,7 +115,7 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             node: IBinaryTreeNode<T>
         ) => {
             if (!node) {
-                return 0
+                return 0;
             }
             return (
                 1 +
@@ -123,9 +123,9 @@ export class BinaryTree<T> implements IBinaryTree<T> {
                     getHeightFromNode(node.left),
                     getHeightFromNode(node.right)
                 )
-            )
-        }
-        return getHeightFromNode(this.root)
+            );
+        };
+        return getHeightFromNode(this.root);
     }
 
     *traverseInOrder(): IterableIterator<string> {
@@ -133,12 +133,12 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             node: IBinaryTreeNode<T>
         ): IterableIterator<string> {
             if (node) {
-                yield* traverse(node.left)
-                yield node.data.toString()
-                yield* traverse(node.right)
+                yield* traverse(node.left);
+                yield node.data.toString();
+                yield* traverse(node.right);
             }
-        }
-        traverse(this.root)
+        };
+        traverse(this.root);
     }
 
     *traversePreOrder(): IterableIterator<string> {
@@ -146,12 +146,12 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             node: IBinaryTreeNode<T>
         ): IterableIterator<string> {
             if (node) {
-                yield node.data.toString()
-                yield* traverse(node.left)
-                yield* traverse(node.right)
+                yield node.data.toString();
+                yield* traverse(node.left);
+                yield* traverse(node.right);
             }
-        }
-        traverse(this.root)
+        };
+        traverse(this.root);
     }
 
     *traversePostOrder(): IterableIterator<string> {
@@ -159,17 +159,17 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             node: IBinaryTreeNode<T>
         ): IterableIterator<string> {
             if (node) {
-                yield* traverse(node.left)
-                yield* traverse(node.right)
-                yield node.data.toString()
+                yield* traverse(node.left);
+                yield* traverse(node.right);
+                yield node.data.toString();
             }
-        }
-        traverse(this.root)
+        };
+        traverse(this.root);
     }
 
     private createRoot(data: T): void {
         if (data) {
-            this.root = this.createNode(data, null)
+            this.root = this.createNode(data, null);
         }
     }
 
@@ -182,6 +182,6 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             parent: parent,
             left: null,
             right: null,
-        }
+        };
     }
 }
