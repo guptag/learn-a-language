@@ -1,4 +1,4 @@
-import { Delays, greeter } from './main';
+import { greeter } from './main';
 
 describe('greeter function', () => {
   // Read more about fake timers: http://facebook.github.io/jest/docs/en/timer-mocks.html#content
@@ -15,11 +15,7 @@ describe('greeter function', () => {
     hello = await p;
   });
 
-  // Assert if setTimeout was called properly
-  it('delays the greeting by 2 seconds', () => {
-    expect((<jest.Mock<void>> setTimeout).mock.calls.length).toBe(1);
-    expect((<jest.Mock<void>> setTimeout).mock.calls[0][1]).toBe(Delays.Long);
-  });
+  
 
   // Assert greeter result
   it('greets a user with `Hello, {name}` message', () => {

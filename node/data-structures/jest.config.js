@@ -20,12 +20,6 @@ module.exports = {
     '!src/**/*.d.ts',
   ],
   testPathIgnorePatterns: ["/node_modules/"],
-  mapCoverage: true,
-  "globals": {
-    "ts-jest": {
-      "skipBabel": true
-    }
-  }
 };
 
 
