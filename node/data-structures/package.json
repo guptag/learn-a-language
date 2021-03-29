@@ -26,7 +26,8 @@
     "__pretest": "npm run lint",
     "test": "npm run build & npm run test-only",
     "test-only": "jest --coverage --verbose",
-    "test:watch": "jest --watch --verbose"
+    "test:watch": "jest --watch --verbose",
+    "format": "prettier --config .prettierrc.json 'src/**/*.ts' --write"
   },
   "author": "Gupta Garuda",
   "license": "MIT",
