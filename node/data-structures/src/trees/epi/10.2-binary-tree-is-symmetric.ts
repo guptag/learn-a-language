@@ -5,28 +5,28 @@
 import { IBinaryTreeNode } from '../adt/binary-tree';
 
 export function isBinaryTreeSymmetric<T>(
-    treeNode: IBinaryTreeNode<T>
+  treeNode: IBinaryTreeNode<T>
 ): boolean {
-    return checkSymmetric(treeNode.left, treeNode.right);
+  return checkSymmetric(treeNode.left, treeNode.right);
 }
 
 function checkSymmetric<T>(
-    leftNode: IBinaryTreeNode<T>,
-    rightNode: IBinaryTreeNode<T>
+  leftNode: IBinaryTreeNode<T>,
+  rightNode: IBinaryTreeNode<T>
 ): boolean {
-    // return true if both branches are null
-    if (!leftNode && !rightNode) {
-        return true;
-    }
+  // return true if both branches are null
+  if (!leftNode && !rightNode) {
+    return true;
+  }
 
-    // return false if one of the branches is null
-    if (!leftNode || !rightNode) {
-        return false;
-    }
+  // return false if one of the branches is null
+  if (!leftNode || !rightNode) {
+    return false;
+  }
 
-    return (
-        leftNode.data === rightNode.data &&
-        checkSymmetric(leftNode.left, rightNode.left) &&
-        checkSymmetric(leftNode.right, rightNode.right)
-    );
+  return (
+    leftNode.data === rightNode.data &&
+    checkSymmetric(leftNode.left, rightNode.left) &&
+    checkSymmetric(leftNode.right, rightNode.right)
+  );
 }

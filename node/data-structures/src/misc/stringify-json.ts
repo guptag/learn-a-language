@@ -10,37 +10,37 @@
 */
 
 export function stringifyJson<T>(obj: T): string | undefined {
-    if (obj === null) {
-        return 'null';
-    }
+  if (obj === null) {
+    return 'null';
+  }
 
-    if (obj === undefined) {
-        return undefined;
-    }
+  if (obj === undefined) {
+    return undefined;
+  }
 
-    if (/number|symbol|boolean/.test(typeof obj) || obj instanceof Date) {
-        return obj.toString();
-    }
+  if (/number|symbol|boolean/.test(typeof obj) || obj instanceof Date) {
+    return obj.toString();
+  }
 
-    if (/string/.test(typeof obj) || obj instanceof Date) {
-        return `"${obj.toString()}"`;
-    }
+  if (/string/.test(typeof obj) || obj instanceof Date) {
+    return `"${obj.toString()}"`;
+  }
 
-    if (obj instanceof Array) {
-        const arrResult = [];
-        for (const val of obj) {
-            arrResult.push(stringifyJson(val));
-        }
-        return `[${arrResult.join(',')}]`;
+  if (obj instanceof Array) {
+    const arrResult = [];
+    for (const val of obj) {
+      arrResult.push(stringifyJson(val));
     }
+    return `[${arrResult.join(',')}]`;
+  }
 
-    const result = [];
-    const keys = Object.keys(obj);
-    keys.forEach((key: string) => {
-        const stringifiedObj = stringifyJson(obj[key]);
-        if (stringifiedObj) {
-            result.push(`"${key}":${stringifiedObj}`);
-        }
-    });
-    return `{${result.join(',')}}`;
+  const result = [];
+  const keys = Object.keys(obj);
+  keys.forEach((key: string) => {
+    const stringifiedObj = stringifyJson(obj[key]);
+    if (stringifiedObj) {
+      result.push(`"${key}":${stringifiedObj}`);
+    }
+  });
+  return `{${result.join(',')}}`;
 }
